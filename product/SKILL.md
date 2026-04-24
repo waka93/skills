@@ -1,4 +1,5 @@
 ---
+model: sonnet
 name: product
 description: >
   Product role agent. Two modes: (A) PRD — translates a feature idea into a structured Product

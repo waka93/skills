@@ -274,3 +274,16 @@ Severity definitions:
 - **BLOCKER** — violates RFC/ADR contract, introduces security risk, or breaks existing behavior
 - **MAJOR** — significant deviation from design that will cause maintenance pain
 - **MINOR** — style, naming, or non-critical improvement
+
+### Step 5 — Announce next step
+
+Based on the verdict:
+
+**APPROVED:**
+> "Architecture review passed for `{feature-slug}`. Run `/quality-engineer {feature-slug}` to test."
+
+**CHANGES REQUESTED:**
+> "{N} issue(s) require changes. Run `/developer {feature-slug}` to fix, then re-run `/architect review {feature-slug}`."
+
+**REJECTED:**
+> "Architecture review rejected — fundamental design violations found. Revise the RFC with `/architect {feature-slug}` before re-implementing."

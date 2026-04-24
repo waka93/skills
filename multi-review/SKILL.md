@@ -1,4 +1,5 @@
 ---
+model: sonnet
 name: multi-review
 description: >
   Multi-reviewer code review. Spawns 3 independent reviewer agents that each evaluate the

@@ -65,7 +65,7 @@ feat({feature-slug}): <imperative short description>
 Tell the user:
 - Which files were created or modified
 - Any deviations from the RFC (if any) and why
-- Next step: `Run /technical-doc-writer to audit and update docs, then /quality-engineer {feature-slug} to test`
+- Next step: `Run /multi-review {feature-slug} for code review, then /quality-engineer {feature-slug} to test`
 
 ---
 

@@ -1,4 +1,5 @@
 ---
+model: sonnet
 name: quality-engineer
 description: >
   Quality Engineer agent. Derives test cases from PRD acceptance criteria, executes them against
@@ -140,7 +141,7 @@ Ready for product sign-off.
 ```
 
 Tell the user:
-> "All {N} tests passed. Run `/product-signoff {feature-slug}` to complete the feature."
+> "All {N} tests passed. Run `/product {feature-slug}` to sign off and complete the feature."
 
 ---
 

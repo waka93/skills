@@ -1,4 +1,5 @@
 ---
+model: haiku
 name: technical-doc-writer
 description: >
   Technical documentation auditor and writer. Scans all documentation files (CLAUDE.md, PRDs, RFCs,
