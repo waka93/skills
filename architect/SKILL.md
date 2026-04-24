@@ -20,7 +20,7 @@ specifications, and you review code to ensure it follows the design you specifie
 
 ### Step 1 — Read the PRD
 
-Read `/home/geniuswrt/repo/boardsage/docs/workflow/prds/{feature-slug}.md`.
+Read `/home/geniuswrt/repo/boardsage/docs/.workflow/prds/{feature-slug}.md`.
 
 If the file does not exist, tell the user:
 > "No PRD found for `{feature-slug}`. Run `/product` to create one first."
@@ -34,10 +34,17 @@ Before designing, read the current codebase to understand context. Use Grep and 
 
 Do not assume — verify. A design that ignores the existing codebase produces unimplementable specs.
 
+**Zero tech debt rule:** If your design introduces a pattern that is inconsistent with existing
+code (e.g., placing a new module in a different location than similar existing modules), you MUST
+include the fix for the existing inconsistency in the RFC's implementation checklist. Do not defer
+trivial cleanups as "out of scope" — a 5-minute file move or import fix is not churn, it is part
+of the feature. Accepting known inconsistencies creates tech debt that the user explicitly does
+not want.
+
 ### Step 3 — Write the RFC
 
 Create the directory if needed and save to:
-`/home/geniuswrt/repo/boardsage/docs/workflow/rfcs/{feature-slug}.md`
+`/home/geniuswrt/repo/boardsage/docs/.workflow/rfcs/{feature-slug}.md`
 
 Use this template exactly:
 
@@ -47,8 +54,8 @@ Use this template exactly:
 **Status:** Proposed
 **Author:** Architect
 **Date:** {today's date}
-**PRD:** docs/workflow/prds/{feature-slug}.md
-**ADRs:** docs/workflow/adrs/{feature-slug}/
+**PRD:** docs/.workflow/prds/{feature-slug}.md
+**ADRs:** docs/.workflow/adrs/{feature-slug}/
 
 ## Summary
 
@@ -141,7 +148,7 @@ trade-off resolution, or anything a future developer would ask "why did we do it
 write an Architecture Decision Record.
 
 Create the directory if needed and save each ADR to:
-`/home/geniuswrt/repo/boardsage/docs/workflow/adrs/{feature-slug}/ADR-{NNN}-{short-title}.md`
+`/home/geniuswrt/repo/boardsage/docs/.workflow/adrs/{feature-slug}/ADR-{NNN}-{short-title}.md`
 
 Number ADRs sequentially starting from 001 within each feature.
 
@@ -153,7 +160,7 @@ Use this template exactly:
 **Status:** Accepted | Superseded | Deprecated
 **Date:** {today's date}
 **Feature:** {feature-slug}
-**RFC:** docs/workflow/rfcs/{feature-slug}.md
+**RFC:** docs/.workflow/rfcs/{feature-slug}.md
 
 ## Context
 
@@ -186,7 +193,7 @@ approach, or architecture chosen.]
 - Architectural patterns (e.g., "adapter pattern over inheritance for platform support")
 - Trade-off resolutions from the RFC's "Alternatives Considered" table — each rejected
   alternative with non-trivial trade-offs deserves an ADR explaining the reasoning
-- Scope decisions (e.g., "keep bgg_fetch as a sys.path hack, don't move it into core/")
+- Scope decisions that involve genuine trade-offs (e.g., "support only PostgreSQL, not MySQL")
 - Any decision a future developer might revisit or question
 
 **When NOT to write an ADR:**
@@ -211,9 +218,9 @@ Triggered when the user asks to review a PR, branch, or the current implementati
 ### Step 1 — Load the specs
 
 Read all available design documents for the feature:
-- `/home/geniuswrt/repo/boardsage/docs/workflow/prds/{feature-slug}.md` (what was required)
-- `/home/geniuswrt/repo/boardsage/docs/workflow/rfcs/{feature-slug}.md` (what was designed)
-- `/home/geniuswrt/repo/boardsage/docs/workflow/adrs/{feature-slug}/*.md` (why decisions were made)
+- `/home/geniuswrt/repo/boardsage/docs/.workflow/prds/{feature-slug}.md` (what was required)
+- `/home/geniuswrt/repo/boardsage/docs/.workflow/rfcs/{feature-slug}.md` (what was designed)
+- `/home/geniuswrt/repo/boardsage/docs/.workflow/adrs/{feature-slug}/*.md` (why decisions were made)
 
 If ADRs exist, use them as the authoritative source for understanding why specific patterns,
 technologies, or trade-offs were chosen. Code that deviates from an ADR's stated decision

@@ -21,9 +21,9 @@ read the code, compare it to the docs, and either fix the docs or escalate code 
 Scan the project for documentation files. Check all of:
 - `CLAUDE.md` (root project instructions)
 - `README.md`
-- `docs/workflow/prds/*.md` (PRDs)
-- `docs/workflow/rfcs/*.md` (RFCs)
-- `docs/workflow/signoffs/*.md` (sign-offs)
+- `docs/.workflow/prds/*.md` (PRDs)
+- `docs/.workflow/rfcs/*.md` (RFCs)
+- `docs/.workflow/signoffs/*.md` (sign-offs)
 - Any other `.md` files in the repo (excluding `node_modules/`, `.venv/`, etc.)
 
 List every doc file found with a one-line summary of what it covers.

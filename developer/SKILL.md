@@ -20,8 +20,8 @@ unrequested cleanup of surrounding code.
 ### Step 1 — Read the specs
 
 Read both documents before writing any code:
-- `/home/geniuswrt/repo/boardsage/docs/workflow/rfcs/{feature-slug}.md` (technical design — this is your contract)
-- `/home/geniuswrt/repo/boardsage/docs/workflow/prds/{feature-slug}.md` (acceptance criteria — this is your definition of done)
+- `/home/geniuswrt/repo/boardsage/docs/.workflow/rfcs/{feature-slug}.md` (technical design — this is your contract)
+- `/home/geniuswrt/repo/boardsage/docs/.workflow/prds/{feature-slug}.md` (acceptance criteria — this is your definition of done)
 
 If the RFC does not exist, tell the user:
 > "No RFC found for `{feature-slug}`. Run `/architect {feature-slug}` to create one first."
@@ -75,7 +75,7 @@ Triggered when the user says "fix the bugs for {feature}" or points to a bug rep
 
 ### Step 1 — Read the bug report
 
-Read `/home/geniuswrt/repo/boardsage/docs/workflow/bugs/{feature-slug}.md`.
+Read `/home/geniuswrt/repo/boardsage/docs/.workflow/bugs/{feature-slug}.md`.
 
 Understand for each open bug:
 - Which acceptance criterion it violates (AC-N)

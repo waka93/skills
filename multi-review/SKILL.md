@@ -27,14 +27,14 @@ Identify `{feature-slug}` from the user's request. If ambiguous, check recent co
 ## Step 2 — Verify specs exist
 
 Check that these files exist before spawning reviewers:
-- `/home/geniuswrt/repo/boardsage/docs/workflow/prds/{feature-slug}.md`
-- `/home/geniuswrt/repo/boardsage/docs/workflow/rfcs/{feature-slug}.md`
+- `/home/geniuswrt/repo/boardsage/docs/.workflow/prds/{feature-slug}.md`
+- `/home/geniuswrt/repo/boardsage/docs/.workflow/rfcs/{feature-slug}.md`
 
 If the PRD or RFC is missing, stop:
 > "Cannot review `{feature-slug}` — missing PRD or RFC. Run `/product` and `/architect` first."
 
 Also check for ADRs:
-- `/home/geniuswrt/repo/boardsage/docs/workflow/adrs/{feature-slug}/`
+- `/home/geniuswrt/repo/boardsage/docs/.workflow/adrs/{feature-slug}/`
 
 Note how many ADRs exist (may be zero).
 
@@ -65,9 +65,9 @@ You are a code reviewer focused on operational and runtime safety.
 Feature: {feature-slug}
 
 Read these specs:
-- RFC: /home/geniuswrt/repo/boardsage/docs/workflow/rfcs/{feature-slug}.md (especially the
+- RFC: /home/geniuswrt/repo/boardsage/docs/.workflow/rfcs/{feature-slug}.md (especially the
   Operational Considerations section, if present)
-- ADRs: /home/geniuswrt/repo/boardsage/docs/workflow/adrs/{feature-slug}/ (if they exist)
+- ADRs: /home/geniuswrt/repo/boardsage/docs/.workflow/adrs/{feature-slug}/ (if they exist)
 
 Then read the implementation files: {file list}
 
@@ -111,9 +111,9 @@ You are a code reviewer focused on security.
 Feature: {feature-slug}
 
 Read these specs:
-- RFC: /home/geniuswrt/repo/boardsage/docs/workflow/rfcs/{feature-slug}.md (especially the
+- RFC: /home/geniuswrt/repo/boardsage/docs/.workflow/rfcs/{feature-slug}.md (especially the
   Security Considerations section)
-- ADRs: /home/geniuswrt/repo/boardsage/docs/workflow/adrs/{feature-slug}/ (if they exist)
+- ADRs: /home/geniuswrt/repo/boardsage/docs/.workflow/adrs/{feature-slug}/ (if they exist)
 
 Then read the implementation files: {file list}
 
@@ -167,7 +167,7 @@ You are a code reviewer focused on code quality and structural integrity.
 Feature: {feature-slug}
 
 Read these specs:
-- RFC: /home/geniuswrt/repo/boardsage/docs/workflow/rfcs/{feature-slug}.md (component table
+- RFC: /home/geniuswrt/repo/boardsage/docs/.workflow/rfcs/{feature-slug}.md (component table
   and data models)
 
 Then read the implementation files: {file list}

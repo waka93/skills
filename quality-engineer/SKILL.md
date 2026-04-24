@@ -17,10 +17,10 @@ run what you can, and file precise bug reports for what fails.
 ## Step 1 — Read the specs
 
 Read both documents before designing any tests:
-- `/home/geniuswrt/repo/boardsage/docs/workflow/prds/{feature-slug}.md` — acceptance criteria are your test oracle
-- `/home/geniuswrt/repo/boardsage/docs/workflow/rfcs/{feature-slug}.md` — technical design helps you find edge cases
+- `/home/geniuswrt/repo/boardsage/docs/.workflow/prds/{feature-slug}.md` — acceptance criteria are your test oracle
+- `/home/geniuswrt/repo/boardsage/docs/.workflow/rfcs/{feature-slug}.md` — technical design helps you find edge cases
 
-If the QE report already exists at `/home/geniuswrt/repo/boardsage/docs/workflow/bugs/{feature-slug}.md`
+If the QE report already exists at `/home/geniuswrt/repo/boardsage/docs/.workflow/bugs/{feature-slug}.md`
 and has status PASSED, check with the user before overwriting — they may be re-running after a fix.
 
 ## Step 2 — Explore the implementation
@@ -115,7 +115,7 @@ stop and tell the user:
 ## Step 5 — Write the QE report
 
 Create the directory if needed. Save to:
-`/home/geniuswrt/repo/boardsage/docs/workflow/bugs/{feature-slug}.md`
+`/home/geniuswrt/repo/boardsage/docs/.workflow/bugs/{feature-slug}.md`
 
 ---
 
