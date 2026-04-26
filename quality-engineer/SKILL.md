@@ -97,15 +97,21 @@ DISCORD_TOKEN=$(cat ../.secret/discord_token) ANTHROPIC_API_KEY=$(cat ../.secret
 **How to automate in Bash:**
 ```bash
 cd /home/geniuswrt/repo/boardsage/discord-bot
+OUTFILE=$(mktemp)
 DISCORD_TOKEN=$(cat ../.secret/discord_token) ANTHROPIC_API_KEY=$(cat ../.secret/claude) \
-  .venv/bin/python bot.py 2>&1 &
+  .venv/bin/python bot.py >"$OUTFILE" 2>&1 &
 BOT_PID=$!
 sleep 8
-kill $BOT_PID 2>/dev/null
+kill -TERM $BOT_PID 2>/dev/null
+sleep 1
+kill -KILL $BOT_PID 2>/dev/null
 wait $BOT_PID 2>/dev/null
+cat "$OUTFILE"
+rm -f "$OUTFILE"
 ```
-Check the captured output for the two log lines above. If the bot crashes before
-connecting (non-143 exit code or missing gateway log), file a **BLOCKER** bug.
+The SIGTERM + SIGKILL sequence ensures the process and its discord.py event-loop threads
+are fully reaped, releasing the flock lock. Check the captured output for the two log
+lines above. If the bot crashes before connecting (missing gateway log), file a **BLOCKER** bug.
 
 If the secrets files do not exist (`../.secret/discord_token`, `../.secret/claude`),
 stop and tell the user:
