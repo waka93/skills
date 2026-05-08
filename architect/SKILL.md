@@ -16,11 +16,27 @@ specifications, and you review code to ensure it follows the design you specifie
 
 ---
 
+## Discovering paths
+
+At the start of every run, determine the repo root and use it for all file paths:
+
+```bash
+git rev-parse --show-toplevel
+```
+
+- PRD: `{repo_root}/docs/.workflow/prds/{feature-slug}.md`
+- RFC: `{repo_root}/docs/.workflow/rfcs/{feature-slug}.md`
+- ADRs: `{repo_root}/docs/.workflow/adrs/{feature-slug}/`
+
+Never hardcode a repo path. Always derive it from `git rev-parse --show-toplevel`.
+
+---
+
 ## Mode A — Write RFC and ADRs
 
 ### Step 1 — Read the PRD
 
-Read `/home/geniuswrt/repo/boardsage/docs/.workflow/prds/{feature-slug}.md`.
+Read `{repo_root}/docs/.workflow/prds/{feature-slug}.md`.
 
 If the file does not exist, tell the user:
 > "No PRD found for `{feature-slug}`. Run `/product` to create one first."
@@ -44,7 +60,7 @@ not want.
 ### Step 3 — Write the RFC
 
 Create the directory if needed and save to:
-`/home/geniuswrt/repo/boardsage/docs/.workflow/rfcs/{feature-slug}.md`
+`{repo_root}/docs/.workflow/rfcs/{feature-slug}.md`
 
 Use this template exactly:
 
@@ -79,12 +95,8 @@ Use this template exactly:
 
 ### Data Models
 
-```python
-# Key data structures (Python dataclasses, TypedDicts, or pseudocode)
-@dataclass
-class ExampleModel:
-    field: str
-```
+[Key data structures in the project's language. Use the appropriate idiom:
+dataclasses for Python, classes/interfaces for TypeScript, structs for Go/Dart, etc.]
 
 ### API / Interface Contract
 
@@ -117,10 +129,10 @@ MUST address each item below. If an item does not apply, write "N/A — {reason}
   how is duplicate execution prevented? (e.g., process lock, leader election, queue consumer groups)
 - **Idempotency / dedup:** Can the same input arrive more than once? (retries, replays, webhooks,
   reconnects) How are duplicate inputs detected and skipped?
-- **Rate limiting:** Does this component make rapid calls to an external API or edit messages
-  frequently? How is throttling handled?
+- **Rate limiting:** Does this component make rapid calls to an external API or perform frequent
+  writes? How is throttling handled?
 - **Crash recovery:** What state is lost on crash? Can stale state (lock files, partial writes,
-  "Thinking..." messages) block restart or confuse users?
+  in-progress indicators) block restart or confuse users?
 - **Graceful shutdown:** Does the component need to drain in-flight work before exiting?
 
 If none of these apply (e.g., the feature is a pure library function with no I/O), write:
@@ -148,7 +160,7 @@ trade-off resolution, or anything a future developer would ask "why did we do it
 write an Architecture Decision Record.
 
 Create the directory if needed and save each ADR to:
-`/home/geniuswrt/repo/boardsage/docs/.workflow/adrs/{feature-slug}/ADR-{NNN}-{short-title}.md`
+`{repo_root}/docs/.workflow/adrs/{feature-slug}/ADR-{NNN}-{short-title}.md`
 
 Number ADRs sequentially starting from 001 within each feature.
 
@@ -189,7 +201,7 @@ approach, or architecture chosen.]
 ```
 
 **When to write an ADR:**
-- Technology or library choices (e.g., "use discord.py over nextcord")
+- Technology or library choices (e.g., "use Flutter over React Native")
 - Architectural patterns (e.g., "adapter pattern over inheritance for platform support")
 - Trade-off resolutions from the RFC's "Alternatives Considered" table — each rejected
   alternative with non-trivial trade-offs deserves an ADR explaining the reasoning
@@ -207,7 +219,7 @@ Tell the user:
 - Where the RFC was saved (full path)
 - How many ADRs were created and their titles
 - 1–2 sentences on the key architectural decision made
-- Next step: `Run /developer {feature-slug} to implement this design`
+- Next step: `Run /quality-engineer write {feature-slug} to write tests, then /developer {feature-slug} to implement`
 
 ---
 
@@ -217,10 +229,10 @@ Triggered when the user asks to review a PR, branch, or the current implementati
 
 ### Step 1 — Load the specs
 
-Read all available design documents for the feature:
-- `/home/geniuswrt/repo/boardsage/docs/.workflow/prds/{feature-slug}.md` (what was required)
-- `/home/geniuswrt/repo/boardsage/docs/.workflow/rfcs/{feature-slug}.md` (what was designed)
-- `/home/geniuswrt/repo/boardsage/docs/.workflow/adrs/{feature-slug}/*.md` (why decisions were made)
+Determine the repo root, then read all available design documents for the feature:
+- `{repo_root}/docs/.workflow/prds/{feature-slug}.md` (what was required)
+- `{repo_root}/docs/.workflow/rfcs/{feature-slug}.md` (what was designed)
+- `{repo_root}/docs/.workflow/adrs/{feature-slug}/*.md` (why decisions were made)
 
 If ADRs exist, use them as the authoritative source for understanding why specific patterns,
 technologies, or trade-offs were chosen. Code that deviates from an ADR's stated decision

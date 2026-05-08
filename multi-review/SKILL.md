@@ -20,23 +20,27 @@ lens, so blind spots in one reviewer's mental model are caught by another.
 
 ---
 
-## Step 1 — Determine the feature slug
+## Step 1 — Determine the feature slug and repo root
 
 Identify `{feature-slug}` from the user's request. If ambiguous, check recent commits or ask.
+
+Determine the repo root:
+```bash
+git rev-parse --show-toplevel
+```
+
+Use `{repo_root}` for all file paths below.
 
 ## Step 2 — Verify specs exist
 
 Check that these files exist before spawning reviewers:
-- `/home/geniuswrt/repo/boardsage/docs/.workflow/prds/{feature-slug}.md`
-- `/home/geniuswrt/repo/boardsage/docs/.workflow/rfcs/{feature-slug}.md`
+- `{repo_root}/docs/.workflow/prds/{feature-slug}.md`
+- `{repo_root}/docs/.workflow/rfcs/{feature-slug}.md`
 
 If the PRD or RFC is missing, stop:
 > "Cannot review `{feature-slug}` — missing PRD or RFC. Run `/product` and `/architect` first."
 
-Also check for ADRs:
-- `/home/geniuswrt/repo/boardsage/docs/.workflow/adrs/{feature-slug}/`
-
-Note how many ADRs exist (may be zero).
+Also check for ADRs at `{repo_root}/docs/.workflow/adrs/{feature-slug}/` and note how many exist (may be zero).
 
 ## Step 3 — Determine what to review
 
@@ -63,11 +67,11 @@ Primary focus: Will this survive production?
 You are a code reviewer focused on operational and runtime safety.
 
 Feature: {feature-slug}
+Repo root: {repo_root}
 
 Read these specs:
-- RFC: /home/geniuswrt/repo/boardsage/docs/.workflow/rfcs/{feature-slug}.md (especially the
-  Operational Considerations section, if present)
-- ADRs: /home/geniuswrt/repo/boardsage/docs/.workflow/adrs/{feature-slug}/ (if they exist)
+- RFC: {repo_root}/docs/.workflow/rfcs/{feature-slug}.md (especially the Operational Considerations section)
+- ADRs: {repo_root}/docs/.workflow/adrs/{feature-slug}/ (if they exist)
 
 Then read the implementation files: {file list}
 
@@ -109,11 +113,11 @@ Primary focus: Is this code safe from attack?
 You are a code reviewer focused on security.
 
 Feature: {feature-slug}
+Repo root: {repo_root}
 
 Read these specs:
-- RFC: /home/geniuswrt/repo/boardsage/docs/.workflow/rfcs/{feature-slug}.md (especially the
-  Security Considerations section)
-- ADRs: /home/geniuswrt/repo/boardsage/docs/.workflow/adrs/{feature-slug}/ (if they exist)
+- RFC: {repo_root}/docs/.workflow/rfcs/{feature-slug}.md (especially the Security Considerations section)
+- ADRs: {repo_root}/docs/.workflow/adrs/{feature-slug}/ (if they exist)
 
 Then read the implementation files: {file list}
 
@@ -165,10 +169,10 @@ Primary focus: Is this clean, maintainable code?
 You are a code reviewer focused on code quality and structural integrity.
 
 Feature: {feature-slug}
+Repo root: {repo_root}
 
 Read these specs:
-- RFC: /home/geniuswrt/repo/boardsage/docs/.workflow/rfcs/{feature-slug}.md (component table
-  and data models)
+- RFC: {repo_root}/docs/.workflow/rfcs/{feature-slug}.md (component table and data models)
 
 Then read the implementation files: {file list}
 

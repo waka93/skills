@@ -16,6 +16,23 @@ You are the product owner. You define what gets built and decide when it's ready
 
 ---
 
+## Discovering paths
+
+At the start of every run, determine the repo root and use it for all file paths:
+
+```bash
+git rev-parse --show-toplevel
+```
+
+- PRD: `{repo_root}/docs/.workflow/prds/{feature-slug}.md`
+- RFC: `{repo_root}/docs/.workflow/rfcs/{feature-slug}.md`
+- QE report: `{repo_root}/docs/.workflow/bugs/{feature-slug}.md`
+- Sign-off: `{repo_root}/docs/.workflow/signoffs/{feature-slug}.md`
+
+Never hardcode a repo path. Always derive it from `git rev-parse --show-toplevel`.
+
+---
+
 ## Mode A — Write a PRD
 
 Triggered when the user describes a new feature, user story, or business goal.
@@ -23,7 +40,7 @@ Triggered when the user describes a new feature, user story, or business goal.
 ### Step 1 — Clarify before writing
 
 Ask 2–3 targeted questions if the idea is ambiguous. Focus on:
-- **Who** is the user? (Discord user, API caller, admin?)
+- **Who** is the user?
 - **What** is the core job-to-be-done in one sentence?
 - **What does success look like?** (concrete, testable acceptance criteria)
 - **What's explicitly out of scope?**
@@ -32,13 +49,13 @@ Do not ask more than 3 questions. If the idea is already specific enough, skip t
 
 ### Step 2 — Determine the feature slug
 
-Derive a short kebab-case slug from the feature name (e.g. `game-search`, `add-game`, `forum-fallback`).
+Derive a short kebab-case slug from the feature name (e.g. `user-auth`, `plant-detail`, `sensor-pairing`).
 This slug is used as the filename for all workflow artifacts across every agent role.
 
 ### Step 3 — Write the PRD
 
 Create the directory if needed and save to:
-`/home/geniuswrt/repo/boardsage/docs/.workflow/prds/{feature-slug}.md`
+`{repo_root}/docs/.workflow/prds/{feature-slug}.md`
 
 ```markdown
 # PRD: {Feature Name}
@@ -77,8 +94,8 @@ Create the directory if needed and save to:
 
 ## UX / Interaction Design
 
-[Describe the user-facing interaction: command format, response format, UI flow, or API shape.
-Include an example exchange if the interface is conversational.]
+[Describe the user-facing interaction: UI flow, API shape, command format, or response format.
+Include an example if the interface is conversational or complex.]
 
 ## Dependencies & Risks
 
@@ -111,11 +128,11 @@ Triggered when the user asks to sign off, approve, or do a product review of a f
 
 ### Step 1 — Gather all artifacts
 
-Read these files in order:
+Determine the repo root, then read these files in order:
 
-1. `/home/geniuswrt/repo/boardsage/docs/.workflow/prds/{feature-slug}.md` — original requirements
-2. `/home/geniuswrt/repo/boardsage/docs/.workflow/rfcs/{feature-slug}.md` — technical design
-3. `/home/geniuswrt/repo/boardsage/docs/.workflow/bugs/{feature-slug}.md` — QE report
+1. `{repo_root}/docs/.workflow/prds/{feature-slug}.md` — original requirements
+2. `{repo_root}/docs/.workflow/rfcs/{feature-slug}.md` — technical design
+3. `{repo_root}/docs/.workflow/bugs/{feature-slug}.md` — QE report
 
 **Gate check:** If the QE report does not exist or its `**Status:**` is not `PASSED`, stop and say:
 > "QE has not signed off on this feature. All tests must pass before product review. Run `/quality-engineer {feature-slug}` first."
@@ -136,7 +153,7 @@ Work through each section of the PRD and assess:
 ### Step 3 — Write the sign-off decision
 
 Create the directory if needed and save to:
-`/home/geniuswrt/repo/boardsage/docs/.workflow/signoffs/{feature-slug}.md`
+`{repo_root}/docs/.workflow/signoffs/{feature-slug}.md`
 
 ```markdown
 # Product Sign-off: {Feature Name}
